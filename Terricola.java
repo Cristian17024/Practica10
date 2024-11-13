@@ -5,7 +5,7 @@ public class Terricola extends Personaje {
 
     @Override
     public String destruir() {
-        return nombre + " destruido";
+        return nombre + " (Terricola) destruido";
     }
 
     @Override

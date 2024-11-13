@@ -7,13 +7,19 @@ public class Escenario {
         this.campoDeBatalla = new Elemento[10][10];
     }
 
+   
     public void agregarElemento(Elemento e) {
-        campoDeBatalla[e.getPosicion().getRenglon()][e.getPosicion().getColumna()] = e;
+        Posicion pos = e.getPosicion();
+        campoDeBatalla[pos.getRenglon()][pos.getColumna()] = e;
+    }
+
+    public Elemento obtenerElemento(Posicion p) {
+        return campoDeBatalla[p.getRenglon()][p.getColumna()];
     }
 
     public void destruirElementos(Posicion p, int radio) {
         ArrayList<Elemento> destruidos = new ArrayList<>();
-        
+
         for (int i = 0; i < campoDeBatalla.length; i++) {
             for (int j = 0; j < campoDeBatalla[i].length; j++) {
                 Elemento e = campoDeBatalla[i][j];
@@ -29,11 +35,12 @@ public class Escenario {
         }
     }
 
+    // para sobreescribir el escenario
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < campoDeBatalla.length; i++) {
+            for (int j = 0; j < campoDeBatalla[i].length; j++) {
                 if (campoDeBatalla[i][j] == null) {
                     sb.append("0 ");
                 } else {
@@ -43,5 +50,10 @@ public class Escenario {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    // limpia la posición en el campo de batalla
+    public void removerElemento(Posicion p) {
+        campoDeBatalla[p.getRenglon()][p.getColumna()] = null;
     }
 }
